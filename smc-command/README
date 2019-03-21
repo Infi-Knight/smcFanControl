@@ -57,6 +57,9 @@ FS!  - Sets "force mode" to fan.  Bit 0 (right to left) is fan 0, bit 1
        is fan 1, etc
 F0Tg - Sets target speed, make sure you fp78 encode it (left shift by 2)
 
+- Requires sudo
+- In my case I have got only on fan
+
 For example, to force both fans to 3500 RPM:
 # python -c "print hex(3500 << 2)"
 0x36b0
@@ -66,30 +69,9 @@ For example, to force both fans to 3500 RPM:
 
 ..to force fan 0 to 4000 RPM and leave fan 1 in automatic mode:
 # smc -k "FS! " -w 0001
-# smc -k F0Tg -w 3e80
+# F0Tg means fan 0, you can query your fans using -l flag
+# smc -k F0Tg -w 3e80  
 
 ..to return both fans to automatic mode:
 # smc -k "FS! " -w 0000
 
-Temperature sensors
--------------------
-TB0T
-TC0D
-TC0P
-TM0P
-TN0P
-Th0H
-Ts0P
-TN1P
-Th1H
-
-Light sensors
--------------
-ALV0 - Left 
-ALV1 - Right 
-
-Motion sensors
---------------
-MO_X
-MO_Y
-MO_Z
